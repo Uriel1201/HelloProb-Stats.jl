@@ -86,7 +86,7 @@ function bwc(M::Real, Γ::Real)
     2 * sqrt(2) * M * Γ * γ / (π * sqrt(M^2 + γ))
 end
 
- # relativistic breitwigner 
+ # relativistic breitwigner
 function rbreitwignerscaled(
     x::Real;
     Γ::Real=0.1,
@@ -95,7 +95,7 @@ function rbreitwignerscaled(
 )
     M <= 0 && throw(ArgumentError("Expected M > 0"))
     Γ <= 0 && throw(ArgumentError("Expected Γ > 0"))
-    x >= 0 ? a * lorentzkernel((M^2 - x^2); c = M * Γ) : zero(1 / (M * Γ))
+    a * lorentzkernel((M^2 - x^2); c = M * Γ)
 end
 
 rbreitwignerdensity(
@@ -104,19 +104,19 @@ rbreitwignerdensity(
     M::Real=1.0
 ) = rbreitwignerscaled(x; Γ, M, a = bwc(M, Γ))
 
-# VOIGT FUNCTION 
+# VOIGT FUNCTION
 
-function voigt(
-    x::Real; 
+function voigtscaled(
+    x::Real;
     Γ::Real=0.1,
     M::Real=1.0,
     σ::Real=1,
     a::Real=1.0
 )
     result, error = quadgk(-Inf, Inf) do τ
-        rbreitwignerscaled(τ; Γ, M, a) * gaussiandensity(x - τ; μ = 0, σ)
+        rbreitwignerscaled(x - τ; Γ, M, a) * gaussianscaled(τ; μ = 0, σ, a)
     end
-    result 
+    result
 end
 
 # PLOTS
