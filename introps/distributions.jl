@@ -59,7 +59,10 @@ end
 
 # LORENTZ-CAUCHY FUNCTION
 
-lorentzkernel(u::Real; c::Real = 1) = c > 0 ? 1 / (u^2 + c^2) : throw(ArgumentError("Expected c > 0"))
+lorentzkernel(
+    u::Real; 
+    c::Real = 1
+) = c > 0 ? 1 / (u^2 + c^2) : throw(ArgumentError("Expected c > 0"))
 
 # u = (x - θ) / σ
 function lorentzscaled(
