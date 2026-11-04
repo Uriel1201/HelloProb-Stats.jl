@@ -11,7 +11,7 @@ function rejsampnormal(
     n::Int;
     μ::Real=0,
     σ::Real=1,
-    rng::AbstractRNG
+    rng::AbstractRNG = Random.default_rng()
 )
     z = Float64[]
     while length(z) < n
