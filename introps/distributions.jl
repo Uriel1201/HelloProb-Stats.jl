@@ -2,9 +2,7 @@ using Plots, QuadGK
 
 # GAUSSIAN FUNCTION
 
-gaussiankernel(
-    u::Real
-) = exp(-u^2 / 2)
+gaussiankernel(u::Real) = exp(-u^2 / 2)
 
 # u = (x - μ) / σ
 function gaussianscaled(
@@ -25,9 +23,7 @@ gaussiandensity(
 
 # EXPONENTIAL FUNCTION
 
-exponentialkernel(
-    u::Real
-) = u >= 0 ? exp(-u) : zero(exp(-u))
+exponentialkernel(u::Real) = u >= 0 ? exp(-u) : zero(exp(-u))
 
 # u = x / β
 function exponentialscaled(
